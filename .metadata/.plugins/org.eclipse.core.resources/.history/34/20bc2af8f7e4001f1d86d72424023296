@@ -1,0 +1,20 @@
+package study02;
+
+import java.util.Scanner;
+
+public class IfEsleTest {
+
+	public static void main(String[] args) {
+
+		int age;
+		
+		Scanner sc = new Scanner(System.in);
+		System.out.print("나이입력");
+		
+		age = sc.nextInt();
+		
+		System.out.println(age);
+
+	}
+
+}

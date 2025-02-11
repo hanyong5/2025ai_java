@@ -1,0 +1,20 @@
+package study01;
+
+public class AnimalTest {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		Animal hAni = new Human();
+		
+		hAni.move();
+		
+		AnimalTest test = new AnimalTest();
+		
+		test.moveAnimal(hAni);
+	}
+	
+	public void moveAnimal(Animal animal) {
+		animal.move();
+	}
+
+}

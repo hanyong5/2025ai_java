@@ -1,0 +1,18 @@
+package study01;
+
+public class Vartest {
+
+	public static void main(String[] args) {
+		int age = 25;
+		long population = 780000000L;
+		
+		float pi = 3.14f;
+		double e = 2.1010102102;
+		
+		char grade = 'A';
+	
+		System.out.println("당신의 등급은 :" + grade);
+
+	}
+
+}
