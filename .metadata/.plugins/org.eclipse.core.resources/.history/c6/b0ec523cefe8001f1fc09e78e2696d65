@@ -1,0 +1,19 @@
+package study03;
+
+public class DeskLampTest {
+
+	public static void main(String[] args) {
+		DeskLamp myLamp = new DeskLamp();
+		DeskLamp myLamp1 = new DeskLamp();
+		DeskLamp myLamp2 = new DeskLamp();
+		
+		myLamp.turnOn();
+		
+		System.out.println(myLamp.toString());
+		
+		myLamp.turnOff();
+		System.out.println(myLamp);
+		
+	}
+
+}

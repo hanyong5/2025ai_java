@@ -1,0 +1,14 @@
+package study03;
+
+public class DeskLamp {
+	boolean isOn; // true false
+	
+	public void turnOn() {
+		isOn = true;
+	}
+	
+	public String toString() {
+		return "현재상태는 " + isOn;
+	}
+
+}

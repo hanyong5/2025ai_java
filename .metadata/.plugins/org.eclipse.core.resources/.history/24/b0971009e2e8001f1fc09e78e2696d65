@@ -1,0 +1,15 @@
+package study03;
+
+public class Circle {
+	int radius; //필드(멤버변수)
+	String color;
+	public double getArea() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+	
+
+
+	
+	
+}

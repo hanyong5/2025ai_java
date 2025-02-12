@@ -1,0 +1,9 @@
+package study03;
+
+public class DeskLampTest {
+
+	public static void main(String[] args) {
+		DeskLamp name = new DeskLamp();
+	}
+
+}
