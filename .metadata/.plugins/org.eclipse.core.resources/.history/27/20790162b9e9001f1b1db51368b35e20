@@ -1,0 +1,13 @@
+package study03;
+
+public class HeroTest {
+
+	public static void main(String[] args) {
+		Hero hero1 = new Hero("아이언맨", "하이테크 슈트", 90, 80);
+		Hero hero2 = new Hero("토르","번개 조종",95,85);
+		
+		System.out.println(hero1);
+		System.out.println(hero2);
+	}
+
+}
