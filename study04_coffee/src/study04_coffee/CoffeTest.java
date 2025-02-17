@@ -16,7 +16,7 @@ public class CoffeTest {
 		
 		shop.showMenu(); // coffeeShop class
 		
-		customer.buyCoffee(shop, "라떼"); //customer class
+		//customer.buyCoffee(shop, "라떼"); //customer class
 		
 		while(true) {
 			System.out.print("구매할 커피 이름을 입력 : ");
@@ -26,7 +26,7 @@ public class CoffeTest {
 				System.out.println("주문종료");
 				break;
 			}
-			System.out.println("주문내역" + coffeeName);
+			System.out.println("주문내역 ["+coffeeName+"]");
 			
 			customer.buyCoffee(shop, coffeeName);
 		}

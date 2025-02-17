@@ -20,10 +20,16 @@ public class CoffeeShop {
 	}
 
 	public Coffee getCoffee(String coffeeName) {
+		coffeeName = coffeeName.intern();
+		
 		for(Coffee coffee:menu ) {
-			if(coffee.name == coffeeName) {
+			if(coffee.name == coffeeName ) {
 				return coffee;  // 아메리카노,4000
 			}
+			
+//			if(coffee.name.equals(coffeeName)) {
+//				return coffee;
+//			}
 		}
 		return null;
 
