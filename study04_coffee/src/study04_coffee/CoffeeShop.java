@@ -22,13 +22,11 @@ public class CoffeeShop {
 	public Coffee getCoffee(String coffeeName) {
 		for(Coffee coffee:menu ) {
 			if(coffee.name == coffeeName) {
-				return coffee;
+				return coffee;  // 아메리카노,4000
 			}
 		}
 		return null;
-		
-		
-		
+
 	}
 	
 	
