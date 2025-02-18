@@ -9,7 +9,11 @@ public class StuduentTest {
 		student.addSubject("스크립트", 80);
 		student.addSubject("파이썬", 60);
 		
+//		student.getAverage();
 		student.printSubjects();
+		
+		
+		
 	}
 
 }

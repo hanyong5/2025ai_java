@@ -22,7 +22,17 @@ public class Student {
 		for(Subject subject:subjects) {
 			System.out.println("- " + subject);
 		}
+		System.out.println(subjects.size() + "과목의 평균점수(소수버림) : " + getAverage() + "점 입니다.");
 	}
 	
+	public int getAverage(){
+		int sum = 0;
+		for(Subject subject:subjects) {
+			sum += subject.getScore();
+		}
+//		System.out.println("합계"+ sum);
+		
+		return (int) Math.floor( (double) sum / subjects.size());
+	  }
 	
 }
