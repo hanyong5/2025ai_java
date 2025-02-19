@@ -1,4 +1,4 @@
-package classRoom;
+package examClass;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,10 +31,25 @@ public class Student {
 		for(Subject subject:subjects) {
 			sum += subject.getScore();
 		}
-//		System.out.println("합계"+ sum);
 		
 		return (int) Math.floor( (double) sum / subjects.size());
 	  }
+	
+	//과목의 최고과목점수
+	public Subject getHighScoreSubject() {
+		
+		Subject highScore = subjects.get(0);
+//		Subject name = new Subject("자바",50);
+//		System.out.println("초기점수"+highScore);
+		
+		for(Subject subject:subjects) {
+//			System.out.println(subject.getScore());
+			if(subject.getScore() > highScore.getScore()) {
+				highScore = subject;
+			}
+		}
+		return highScore;
+	}
 	
 	
 	
