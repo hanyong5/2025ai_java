@@ -13,7 +13,8 @@ public class StuduentTest {
 		student.printSubjects();
 		
 
-		System.out.println("최고과목과 점수는" + student.getHighScoreSubject());
+//		System.out.println("최고과목과 점수는" + student.getHighScoreSubject());
+		
 		
 		
 		

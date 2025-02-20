@@ -24,6 +24,10 @@ public class Student {
 		}
 		System.out.println(subjects.size() + "과목의 평균점수(소수버림) : " + getAverage() + "점 입니다.");
 		
+		Subject topScore = getHighScoreSubject();
+		
+		System.out.println("최고과목은 " + topScore.getName()+ ", 점수 : " + topScore.getScore() + "점 입니다.");
+		
 	}
 	
 	public int getAverage(){
@@ -35,7 +39,7 @@ public class Student {
 		return (int) Math.floor( (double) sum / subjects.size());
 	  }
 	
-	//과목의 최고과목점수
+	//과목의 최고과목점수1
 	public Subject getHighScoreSubject() {
 		
 		Subject highScore = subjects.get(0);
@@ -51,6 +55,23 @@ public class Student {
 		return highScore;
 	}
 	
+	
+	public Subject getHigh() {
+//		Subject name = new Subject("국어",10);
+		Subject name = subjects.get(0); // List<Subject> subjects
+										// 과목명 = 자바, 점수 = 50
+										// name.getScore() <- 50
+		for(Subject kim:subjects) { // 50,80,60 kim.getScore()
+			
+			if(kim.getScore() > name.getScore()) { // 1. 50 > 50(f) 2.80 > 50(t) 3. 60 > 80(f)
+				name = kim;
+			}
+			
+			
+		}
+		
+		return name; // 스크립트,80
+	}
 	
 	
 }
