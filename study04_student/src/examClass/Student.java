@@ -30,6 +30,23 @@ public class Student {
 		
 	}
 	
+	//과목의 최고과목점수1
+		public Subject getHighScoreSubject() {
+			
+			Subject highScore = subjects.get(0);
+//			Subject name = new Subject("자바",50);
+//			System.out.println("초기점수"+highScore);
+			
+			for(Subject subject:subjects) {
+//				System.out.println(subject.getScore());
+				if(subject.getScore() > highScore.getScore()) {
+					highScore = subject;
+				}
+			}
+			return highScore;
+		}
+	
+	
 	public int getAverage(){
 		int sum = 0;
 		for(Subject subject:subjects) {
@@ -39,21 +56,7 @@ public class Student {
 		return (int) Math.floor( (double) sum / subjects.size());
 	  }
 	
-	//과목의 최고과목점수1
-	public Subject getHighScoreSubject() {
-		
-		Subject highScore = subjects.get(0);
-//		Subject name = new Subject("자바",50);
-//		System.out.println("초기점수"+highScore);
-		
-		for(Subject subject:subjects) {
-//			System.out.println(subject.getScore());
-			if(subject.getScore() > highScore.getScore()) {
-				highScore = subject;
-			}
-		}
-		return highScore;
-	}
+	
 	
 	
 	public Subject getHigh() {
@@ -67,9 +70,7 @@ public class Student {
 				name = kim;
 			}
 			
-			
 		}
-		
 		return name; // 스크립트,80
 	}
 	
