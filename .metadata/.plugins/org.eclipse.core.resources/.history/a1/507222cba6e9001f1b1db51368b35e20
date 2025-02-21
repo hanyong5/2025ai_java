@@ -1,6 +1,0 @@
-package study03;
-
-public class Pizza {
-	int size;
-	String type;
-}

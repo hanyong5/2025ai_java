@@ -12,7 +12,25 @@ public class Student {
 		this.subjects = new ArrayList<>();
 	}
 	
-	
+	public void addSubject(String subjectName) {
+		subjects.add(new Subject(subjectName));
+	}
+
+	public Subject getSubject(String subjectName) {
+		
+		for(Subject subject:subjects) {
+//			if(subject.getName() == subjectName) {
+//				return subject;
+//			}
+			if(subject.getName().equals(subjectName)) {
+				return subject;
+			}
+		}
+		
+		return null;
+	}
+
+
 	
 	
 }
