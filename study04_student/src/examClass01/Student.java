@@ -30,6 +30,15 @@ public class Student {
 		return null;
 	}
 
+	public void printAllSubjects() {
+		System.out.println("학생이름 : " + name);
+		for(Subject subject:subjects) {
+			subject.printExams();
+			System.out.println();
+		}
+		
+	}
+
 
 	
 	
