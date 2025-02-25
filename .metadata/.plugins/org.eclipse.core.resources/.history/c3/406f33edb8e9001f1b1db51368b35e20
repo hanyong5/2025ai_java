@@ -1,9 +1,0 @@
-package study03;
-
-public class Hero {
-	String name;
-	String power;
-	int attack;
-	int defense;
-	String rank;
-}
