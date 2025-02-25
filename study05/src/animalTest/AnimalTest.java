@@ -16,6 +16,7 @@ public class AnimalTest {
 		cat.showInfo();
 		cat.makeSound();
 		cat.scratch();
+		cat.
 		
 	}
 
