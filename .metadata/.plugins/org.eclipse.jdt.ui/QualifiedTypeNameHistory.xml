@@ -13,4 +13,5 @@
     <fullyQualifiedTypeName name="java.lang.Override"/>
     <fullyQualifiedTypeName name="java.util.List"/>
     <fullyQualifiedTypeName name="java.util.ArrayList"/>
+    <fullyQualifiedTypeName name="carTest1.ManualCar"/>
 </qualifiedTypeNameHistroy>

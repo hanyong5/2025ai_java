@@ -15,7 +15,11 @@ CREATE TABLE orders (
 );
 
 INSERT INTO customers (name) VALUES ('Alice'), ('Bob'), ('Charlie');
-in
+INSERT INTO customers (name) VALUES ('Alice'), ('Bob'), ('Charlie');
+INSERT INTO customers (name) VALUES ('Alice'), ('Bob'), ('Charlie');
+INSERT INTO customers (name) VALUES ('Alice'), ('Bob'), ('Charlie');
+INSERT INTO customers (name) VALUES ('Alice'), ('Bob'), ('Charlie');
+
 
 INSERT INTO orders (customer_id, product, order_date) VALUES
 (1, 'Apple', '2025-01-01'),
