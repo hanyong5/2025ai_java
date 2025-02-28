@@ -31,9 +31,6 @@ public class AnimalTest {
 		Cat myCat = (Cat)animals[1];
 		myCat.scratch();
 		
-		
-		
-		
 	}
 
 }
