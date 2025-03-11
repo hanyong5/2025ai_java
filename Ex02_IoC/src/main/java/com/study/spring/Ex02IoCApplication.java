@@ -20,6 +20,9 @@ public class Ex02IoCApplication {
 		
 		Member member1 = (Member)context.getBean("member1");
 		member1.print();
+		
+		Member member2 = context.getBean("hello",Member.class);
+		member2.print();
 	}
 
 }

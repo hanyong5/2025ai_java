@@ -16,5 +16,12 @@ public class Config {
 
 		return member1;
 	}
+	
+	
+	@Bean(name="hello")
+	public Member member2() {
+		return new Member("전우치","도사",new PrinterB());
+	}
+	
 
 }
