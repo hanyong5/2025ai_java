@@ -1507,3 +1507,9 @@ This warning can be switched off on the Team > Git > Confirmations and Warnings 
 
 !ENTRY org.springframework.tooling.boot.ls 1 0 2025-03-11 09:42:42.709
 !MESSAGE Started Boot LS process
+
+!ENTRY org.springframework.tooling.boot.ls 1 0 2025-03-11 10:47:12.384
+!MESSAGE Classpath changed for project: Ex02_IoC
+
+!ENTRY org.springframework.tooling.boot.ls 1 0 2025-03-11 10:47:12.390
+!MESSAGE Boot project ADDED: Ex02_IoC
