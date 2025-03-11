@@ -14,4 +14,10 @@
     <fullyQualifiedTypeName name="java.util.List"/>
     <fullyQualifiedTypeName name="java.util.ArrayList"/>
     <fullyQualifiedTypeName name="carTest1.ManualCar"/>
+    <fullyQualifiedTypeName name="com.study.spring.tv.TV"/>
+    <fullyQualifiedTypeName name="com.study.spring.tv.LgTv"/>
+    <fullyQualifiedTypeName name="com.study.spring.tv.SamsungTv"/>
+    <fullyQualifiedTypeName name="com.study.spring.bean.BeanContainer"/>
+    <fullyQualifiedTypeName name="java.awt.Container"/>
+    <fullyQualifiedTypeName name="com.study.spring.tv.SonyTv"/>
 </qualifiedTypeNameHistroy>

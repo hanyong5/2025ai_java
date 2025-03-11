@@ -21,6 +21,16 @@ public class AnimalTest {
 			animal.eat();
 			animal.makeSound();
 			animal.sleep();
+			
+			if(animal instanceof Dog) {
+				Dog dog = (Dog) animal;
+				dog.tail();
+			}
+			if(animal instanceof Cat) {
+				Cat cat = (Cat) animal;
+				cat.scratch();
+			}
+			
 			System.out.println("-------------");
 			
 		}

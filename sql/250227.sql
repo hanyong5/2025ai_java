@@ -1,183 +1,178 @@
 use shop;
-desc t_customer;
-CREATE TABLE t_customer(
-	 customer_id int not null auto_increment,
-	 customer_name varchar(10) not null,
-	 phone varchar(20) not null unique,
-	 email varchar(50) not null unique,
-	 address varchar(100) not null,
-	 regist_date datetime default now(),
-	 region_code varchar(3) not null,
-	 primary key(customer_id)
- );
 
-CREATE TABLE t_region(
-	 region_code varchar(3) not null,
-	 region_name varchar(10) not null,
-	 primary key(region_code)
- );
+-- //Create Department table
+CREATE TABLE department (
+department_code INT PRIMARY KEY AUTO_INCREMENT,
+department_name VARCHAR(50)
+);
 
-CREATE TABLE t_product(
-	 product_code int not null auto_increment,
-	 product_name varchar(50) not null,
-	 price int,
-	 primary key(product_code)
- );
+-- //Create Student table
+CREATE TABLE student (
+student_id INT PRIMARY KEY AUTO_INCREMENT,
+student_name VARCHAR(50),
+student_height DECIMAL(5,2),
+department_code INT
+);
 
- CREATE TABLE t_sales(
-	 id int not null auto_increment,
-	 customer_id int not null,
-	 product_code int not null,
-	 qty int not null,
-	 sales_date datetime default now(),
-	 primary key(id)
- );
- 
-ALTER TABLE t_customer ADD CONSTRAINT fk_region_code FOREIGN KEY (region_code) REFERENCES t_region(region_code);
-ALTER TABLE t_sales ADD CONSTRAINT fk_customer_id FOREIGN KEY (customer_id) REFERENCES t_customer (customer_id);
-ALTER TABLE t_sales ADD CONSTRAINT fk_product_code FOREIGN KEY (product_code) REFERENCES t_product (product_code);
 
-INSERT INTO t_region (region_code, region_name) VALUES
- ('02', '서울특별시'),
- ('031', '경기도'),
- ('032', '인천광역시'),
- ('033', '강원특별자치도'),
- ('041', '충청남도'),
- ('042', '대전광역시'),
- ('043', '충청북도'),
- ('044', '세종특별자치시'),
- ('051', '부산광역시'),
- ('052', '울산광역시'),
- ('053', '대구광역시'),
- ('054', '경상북도'),
- ('055', '경상남도'),
- ('061', '전라남도'),
- ('062', '광주광역시'),
- ('063', '전라북도'),
- ('064', '제주특별자치도');
- 
- 
-INSERT INTO t_customer (customer_name, phone, email, address, region_code)
- VALUES
- ('홍길동', '010-1234-5678', 'hong@example.com', '서울시 강남구', '02'),
- ('김철수', '010-9876-5432', 'kim@example.com', '경기도 수원시', '031'),
- ('이영희', '010-1111-2222', 'lee@example.com', '인천시 남구', '032'),
- ('박민지', '010-5555-7777', 'park@example.com', '강원도 춘천시', '033'),
- ('정기호', '010-9999-8888', 'jung@example.com', '대전시 중구', '042');
+-- // Create Professor table
+CREATE TABLE professor (
+professor_code INT PRIMARY KEY AUTO_INCREMENT,
+professor_name VARCHAR(50),
+department_code INT
+);
 
-INSERT INTO t_product(product_name, price)
- VALUES
- ('노트북', 1500000),
- ('스마트폰', 1000000),
- ('키보드', 50000),
- ('마우스', 30000),
- ('이어폰', 70000);
+-- // Create Course table
+CREATE TABLE course (
+course_code INT PRIMARY KEY AUTO_INCREMENT,
+course_name VARCHAR(50),
+professor_code INT,
+start_date DATE,
+end_date DATE
+);
 
-INSERT INTO t_sales (customer_id, product_code, qty)
- VALUES
- (1, 1, 2),
- (2, 2, 1),
- (3, 3, 5),
- (4, 4, 3),
- (5, 5, 2),
- (1, 2, 3),
- (3, 1, 1),
- (2, 4, 2),
- (4, 3, 4),
- (5, 5, 1);
+-- // Create Student_Course table
+CREATE TABLE student_course (
+id INT not null unique,
+student_id INT,
+course_code INT,
+primary key(student_id , course_code)
+);
 
-select * from shop.t_customer tc ;
-select * from shop.t_region tr ;
-select * from shop.t_product tp ;
-select * from shop.t_sales ts ;
+-- // Add foreign key constraints using ALTER TABLE
+ALTER TABLE student ADD CONSTRAINT FK_Student_Department FOREIGN KEY (department_code) REFERENCES department(department_code);
+ALTER TABLE professor ADD CONSTRAINT FK_Professor_Department FOREIGN KEY (department_code) REFERENCES department(department_code);
+ALTER TABLE course ADD CONSTRAINT FK_Course_Professor FOREIGN KEY (professor_code) REFERENCES professor(professor_code);
+ALTER TABLE student_course ADD CONSTRAINT FK_Student_Course_Student FOREIGN KEY (student_id) REFERENCES student(student_id);
+ALTER TABLE student_course ADD CONSTRAINT FK_Student_Course_Course FOREIGN KEY (course_code) REFERENCES course(course_code);
 
-# 제품별(product)로 구매된 총수량(sales)과 총가격(product)을 계산하여 출력
 
-select tp.product_name , sum(tp.price), sum(ts.qty)
-from t_sales ts 
-join t_product tp
-on ts.product_code = tp.product_code
-group by tp.product_name
-;
 
-# 특정고객(3)이 구매(sales)한 제품이름(product) 출력
+-- 학과
+INSERT INTO department (department_name) VALUES
+("수학통계학"),
+("국어문과"),
+("전자정보통신과"),
+("모바일AI공학");
+
+-- 학생
+INSERT INTO student (student_name, student_height,
+department_code) VALUES
+("가학생", 170.5, 1),
+("나학생", 165.2, 1),
+("다학생", 180.2, 1),
+("라학생", 175.8, 2),
+("마학생", 160.7, 2),
+("바학생", 168.3, 3),
+("사학생", 172.1, 4),
+("아학생", 175.3, 4);
+
+-- 교수
+INSERT INTO professor (professor_name, department_code) VALUES
+("가교수", 1),
+("나교수", 2),
+("다교수", 3),
+("빌게이츠", 4),
+("스티브잡스", 3);
+
+
+-- 개설과목
+INSERT INTO course (course_name, professor_code, start_date,
+end_date) VALUES
+("교양 영어", 1, "2023-07-01", "2023-08-15"),
+("데이터베이스 입문", 3, "2023-07-01", "2023-08-31"),
+("회로이론", 2, "2023-07-15", "2023-09-15"),
+("공학수학", 4, "2023-07-15", "2023-09-30"),
+("객체지향 프로그래밍", 3, "2023-07-01", "2023-08-31");
+
+-- 수강
+INSERT INTO student_course (id, student_id, course_code) VALUES
+(1, 1, 1),
+(2, 2, 1),
+(3, 3, 2),
+(4, 4, 3),
+(5, 5, 4),
+(6, 6, 5),
+(7, 7, 5);
+
+
+select * from shop.student;
+select * from shop.department;
+select * from shop.course;
+select * from shop.professor;
+select * from shop.student_course;
+
+
+-- 학생번호, 학생이름, 키, 학과번호, 학과명 정보를 출력
+select 
+	s.student_id,
+	s.student_name,
+	s.student_height,
+	d.department_code,
+	d.department_name
+from shop.student s 
+inner join shop.department d 
+on s.department_code = d.department_code;
+
+
+
+select * from shop.department;
+select * from shop.professor;
+-- 교수의 학과정보를 출력
+select
+	p.professor_name,
+	d.department_name
+from shop.professor p 
+join shop.department d 
+on p.department_code = d.department_code;
+
+-- 학과별 교수의 수를 출력
+select d.department_name,count(p.professor_name) as count
+from shop.professor p 
+join shop.department d 
+on p.department_code = d.department_code
+group by d.department_name;
+
+select * from shop.student s ;
+select * from shop.department d; 
+
+-- 수학통계학과 학생정보
+select *
+from shop.student s 
+where s.department_code = 1;
 
 select 
-	ts.customer_id,
-	tc.customer_name,
-	tp.product_name
-from t_sales ts 
-join t_product tp 
-	on ts.product_code = tp.product_code
-join t_customer tc 
-	on ts.customer_id =tc.customer_id
-where tc.customer_name like "이영희"
-order by tp.product_name asc
-;
-
-# 특정고객(3)이 구매(sales)한 제품이름(product) 출력
-
-select ts.customer_id ,tp.product_name, ts.sales_date
-from t_sales ts
-join t_product tp 
-on ts.product_code = tp.product_code
-where ts.customer_id = 3
-;
+	s.student_id,
+	s.student_name,
+	s.student_height,
+	d.department_name
+from shop.student s 
+join shop.department d 
+on s.department_code = d.department_code
+where d.department_name = '수학통계학';
 
 
+select * from shop.student s ;
+select * from shop.department d; 
+
+-- 학생 중 성이 '바%'인 학생이 속한 학과이름과 학생이름을 출력
+select 
+	s.student_id,
+	s.student_name,
+	d.department_name
+from shop.student s 
+join shop.department d 
+on s.department_code = d.department_code
+where s.student_name like '바%';
+
+-- 학생의 키가 175~180사이에 속하는 학생 수를 출력
+select count(s.student_id) as cnt
+from shop.student s
+where s.student_height between 175 and 180;
 
 
-# 각 지역별로 고객수를 계산
-select  
-	tr.region_code,tr.region_name,
-	count(*) as count
-from t_customer tc 
-join t_region tr 
-on tc.region_code = tr.region_code
-group by tr.region_code;
 
-# 각 지역별로 고객수, 고객이름출력
-select  
-	tr.region_code,
-	GROUP_CONCAT(tc.customer_name),
-	count(*) as count
-from t_customer tc 
-join t_region tr 
-on tc.region_code = tr.region_code
-group by tr.region_code;
-
-
-select * from shop.t_customer tc ;
-select * from shop.t_region tr ;
-select * from shop.t_product tp ;
-select * from shop.t_sales ts ;
-
-# 고객(customer)이 속한 지역(region)별 총 구매량(sales) 출력
-
-select tc.customer_name,tc.region_code,ts.qty
-from t_sales ts 
-join t_customer tc 
-on ts.customer_id = tc.customer_id;
-
-select tc.region_code,sum(ts.qty) as count
-from t_sales ts 
-join t_customer tc 
-on ts.customer_id = tc.customer_id
-group by tc.region_code;
-
-#결과
-select tr.region_name, Rc.count
-from t_region tr 
-join (
-	select tc.region_code,sum(ts.qty) as count
-	from t_sales ts 
-	join t_customer tc 
-	on ts.customer_id = tc.customer_id
-	group by tc.region_code
-) Rc
-on tr.region_code = Rc.region_code
-order by Rc.count desc;
-
+-- 학과별 키의 최고값과 평균값을 출력
 
 
 
