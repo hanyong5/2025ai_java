@@ -14,7 +14,7 @@ public class MyDAO {
 	JdbcTemplate jdbcTemplate;
 	
 	public List<MyDTO> list(){
-		String query = "select * from simple_bbs";
+		String query = "select * from simple_bbs order by id desc";
 		List<MyDTO> list = 
 				jdbcTemplate.query(
 						query, new BeanPropertyRowMapper<>(MyDTO.class)
