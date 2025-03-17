@@ -17,7 +17,7 @@ ul, li {
 </style>
 </head>
 <body>
-	<div class="bg-primary text-white mb-5" >
+	<div class="bg-primary text-white mb-5">
 
 		<div class="container d-flex justify-content-between">
 			<h1>LOGO</h1>
@@ -30,9 +30,8 @@ ul, li {
 	<div class="container ">
 		<h3>글쓰기</h3>
 		<hr />
-		
-		<form action="write" method="get">
 
+		<form action="write" method="get">
 
 			<div class="row mb-3 px-3">
 				<label for="name" class="col-2 col-form-label">작성자</label> <input
@@ -46,14 +45,13 @@ ul, li {
 				<label for="content" class="col-2 col-form-label">내용</label> <input
 					type="text" id="content" class="col form-control" name="content" />
 			</div>
-			
+
 			<div class="d-flex justify-content-end">
-			
-			<input type="button" value="insert" class="btn btn-primary" />
+				<input type="submit" value="insert" class="btn btn-primary" />
 			</div>
 
 		</form>
-		
+
 	</div>
 
 </body>
