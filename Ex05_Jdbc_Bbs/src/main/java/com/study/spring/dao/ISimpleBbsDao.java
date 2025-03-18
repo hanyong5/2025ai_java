@@ -12,6 +12,15 @@ public interface ISimpleBbsDao {
 	//list - List<SimpleBbsDto>
 	public List<SimpleBbsDto> listDao();
 
+    //count - Integer(null이 나오면 안됨, 래퍼클래스)
+	public Integer countDao();
+
+
 	//view - SimpleBbsDto 
+	public SimpleBbsDto viewDao(String id);
+
+
 	//delete - int
+	public int deleteDao(String id);
+
 }

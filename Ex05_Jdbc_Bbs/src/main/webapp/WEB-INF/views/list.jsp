@@ -28,7 +28,7 @@ ul, li {
 		</div>
 	</div>
 	<div class="container">
-		<h3>글리스트</h3>
+		<h3>글리스트( 게시물 : ${count } )</h3>
 		<table class="table table-striped table-hover">
 			<tr>
 				<th>번호</th>
@@ -40,8 +40,8 @@ ul, li {
 				<tr>
 					<td>${dto.id}</td>
 					<td>${dto.writer }</td>
-					<td><a href="#" class="nav-link">${dto.title }</a></td>
-					<td><a href="#" class="btn btn-primary">삭제</a></td>
+					<td><a href="/view?id=${dto.id}" class="nav-link">${dto.title }</a></td>
+					<td><a href="/delete?id=${dto.id}" class="btn btn-primary">삭제</a></td>
 				</tr>
 			</c:forEach>
 		</table>

@@ -37,4 +37,32 @@ public class SimpleBbsDao implements ISimpleBbsDao {
 		return list;
 	}
 
+	@Override
+	public Integer countDao() {
+		System.out.println("--------------- countDao() 실행 ---------------");
+		
+		String query = "select count(*) from simple_bbs";
+		Integer count = template.queryForObject(query, Integer.class);
+		return count;
+	}
+
+	@Override
+	public SimpleBbsDto viewDao(String id) {
+		System.out.println("--------------- viewDao 실행 ---------------");
+		String query = "select * from simple_bbs where id = " + id ;
+		SimpleBbsDto view = template.queryForObject(
+				query, new BeanPropertyRowMapper<>(SimpleBbsDto.class)
+				);
+		
+		return view;
+	}
+
+	@Override
+	public int deleteDao(String id) {
+		System.out.println("--------------- deleteDao 실행 --------------");
+		String query = "delete from simple_bbs where id = ? ";
+		
+		return template.update(query, Integer.parseInt(id));
+	}
+
 }

@@ -16,10 +16,17 @@ public class MyController {
 	@Autowired
 	ISimpleBbsDao dao;
 
+//	@RequestMapping("/")
+//	public @ResponseBody String root() {
+//		return "jdbc template";
+//	}
+	
 	@RequestMapping("/")
-	public @ResponseBody String root() {
-		return "jdbc template";
+	public String root() {
+		return "redirect:list";
 	}
+	
+	
 
 	@RequestMapping("/writeForm")
 	public String writeForm() {
@@ -31,20 +38,44 @@ public class MyController {
 		String writer = request.getParameter("writer");
 		String title = request.getParameter("title");
 		String content = request.getParameter("content");
-		
-//		dao.writeDao(writer,title,content);
-		
+	
 		dao.writeDao(writer, title, content);
 		
 		System.out.println(writer + title + content);
-		return null;
+		return "redirect:list";
 	}
 	
 	
 	@RequestMapping("/list")
 	public String list(Model model) {
 		model.addAttribute("lists",dao.listDao());
+		model.addAttribute("count",dao.countDao());
 		return "list";
+	}
+	
+	
+	// http://localhost:8080/view?id=1
+	@RequestMapping("/view")
+	public String view(
+			HttpServletRequest request,
+			Model model
+			) {
+		String sId = request.getParameter("id");
+		
+		model.addAttribute("dto",dao.viewDao(sId));
+		
+		return "view";
+	}
+	
+	// http://localhost:8080/delete?id=1
+	@RequestMapping("/delete")
+	public String Delete(
+			HttpServletRequest request
+			) {
+		
+		dao.deleteDao(request.getParameter("id"));
+		
+		return "redirect:list";
 	}
 	
 	

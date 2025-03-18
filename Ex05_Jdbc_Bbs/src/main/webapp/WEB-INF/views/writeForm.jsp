@@ -23,7 +23,7 @@ ul, li {
 			<h1>LOGO</h1>
 			<ul class="d-flex gap-3 align-items-center">
 				<li><a href="/writeForm" class="nav-link">글쓰기</a></li>
-				<li><a href="#" class="nav-link">리스트</a></li>
+				<li><a href="/list" class="nav-link">리스트</a></li>
 			</ul>
 		</div>
 	</div>

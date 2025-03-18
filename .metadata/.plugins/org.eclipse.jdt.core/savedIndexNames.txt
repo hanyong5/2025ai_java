@@ -55,7 +55,6 @@ INDEX VERSION 1.134+C:\hanyong5\02java\.metadata\.plugins\org.eclipse.jdt.core
 3982983488.index
 282077520.index
 3414199450.index
-2001141988.index
 431863062.index
 2831480646.index
 3126130185.index
