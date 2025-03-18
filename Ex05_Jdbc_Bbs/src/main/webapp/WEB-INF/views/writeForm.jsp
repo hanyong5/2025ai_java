@@ -19,9 +19,9 @@ ul, li {
 <body>
 	<div class="bg-primary text-white mb-5">
 
-		<div class="container d-flex justify-content-between">
+		<div class="container d-flex justify-content-between  align-items-center">
 			<h1>LOGO</h1>
-			<ul class="d-flex gap-3 align-itmes-center ">
+			<ul class="d-flex gap-3 align-items-center">
 				<li><a href="/writeForm" class="nav-link">글쓰기</a></li>
 				<li><a href="#" class="nav-link">리스트</a></li>
 			</ul>

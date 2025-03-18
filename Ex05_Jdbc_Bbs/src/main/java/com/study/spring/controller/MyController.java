@@ -39,5 +39,18 @@ public class MyController {
 		System.out.println(writer + title + content);
 		return null;
 	}
+	
+	
+	@RequestMapping("/list")
+	public String list(Model model) {
+		model.addAttribute("lists",dao.listDao());
+		return "list";
+	}
+	
+	
+	
+	
+	
+	
 
 }
