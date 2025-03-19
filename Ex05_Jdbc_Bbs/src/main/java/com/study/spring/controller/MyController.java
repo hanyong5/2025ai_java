@@ -45,7 +45,7 @@ public class MyController {
 		dao.writeDao(writer, title, content);
 		
 		System.out.println(writer + title + content);
-		return "redirect:bbs/list";
+		return "redirect:list";
 	}
 	
 	//localhost:8080/list?page=2&size=10
@@ -54,8 +54,14 @@ public class MyController {
 			HttpServletRequest request,
 			Model model) {
 		
-		int page = Integer.parseInt(request.getParameter("page")); // 문자를 int변경
-		int size = Integer.parseInt(request.getParameter("size"));
+		String pageParam = request.getParameter("page");
+		String sizeParam = request.getParameter("size");
+		
+		
+		int page = (pageParam != null && !pageParam.isEmpty() ) ? Integer.parseInt(pageParam):1; 
+		int size = (sizeParam != null && !sizeParam.isEmpty() ) ? Integer.parseInt(sizeParam):5;
+		
+
 		
 		int totalCount = dao.countDao();
 		
@@ -66,7 +72,12 @@ public class MyController {
 				
 				
 		model.addAttribute("lists",list);
+		
 		model.addAttribute("totalCount",totalCount);
+		
+		model.addAttribute("totalPages",totalPages);
+		model.addAttribute("currentPage",page);
+		model.addAttribute("size",size);
 				
 				
 				
@@ -95,7 +106,7 @@ public class MyController {
 		
 		dao.deleteDao(request.getParameter("id"));
 		
-		return "redirect:bbs/list";
+		return "redirect:list";
 	}
 	
 	

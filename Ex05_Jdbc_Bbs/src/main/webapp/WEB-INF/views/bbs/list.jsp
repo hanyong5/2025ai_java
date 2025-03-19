@@ -12,9 +12,9 @@
 				<th>제목</th>
 				<th>삭제</th>
 			</tr>
-			<c:forEach items="${lists}" var="dto">
+			<c:forEach items="${lists}" var="dto" varStatus="loop">
 				<tr>
-					<td>${dto.id}</td>
+					<td>${totalCount - ((currentPage-1)*size + loop.index) }</td>
 					<td>${dto.writer }</td>
 					<td><a href="/view?id=${dto.id}" class="nav-link">${dto.title }</a></td>
 					<td><a href="/delete?id=${dto.id}" class="btn btn-primary">삭제</a></td>
@@ -23,11 +23,23 @@
 		</table>
 		<div class="d-flex justify-content-center">
 			<ul class="pagination">
-				<li class="page-item"><a class="page-link">Previous</a></li>
-				<li class="page-item"><a class="page-link" href="#">1</a></li>
-				<li class="page-item"><a class="page-link" href="#">2</a></li>
-				<li class="page-item"><a class="page-link" href="#">3</a></li>
-				<li class="page-item"><a class="page-link" href="#">Next</a></li>
+				<c:if test="${currentPage > 1 }">
+			
+				<li class="page-item">
+					<a class="page-link" href="list?page=${currentPage -1}&size=${size}">Previous</a>
+				</li>
+				</c:if>
+				
+				<c:forEach begin="1" end="${totalPages }" var="page">
+				<li class="page-item ${page == currentPage ? 'active':''}" >
+					<a class="page-link" href="list?page=${page}&size=${size}">${page}</a>
+				</li>
+				</c:forEach>
+
+				<c:if test="${currentPage < totalPages}">
+				
+				<li class="page-item"><a class="page-link" href="list?page=${currentPage + 1}&size=${size}">Next</a></li>
+				</c:if>
 			</ul>
 		</div>
 		<div  class="d-flex justify-content-end">
