@@ -26,12 +26,16 @@ public class SimpleBbsDao implements ISimpleBbsDao {
 	}
 
 	@Override
-	public List<SimpleBbsDto> listDao() {
+	public List<SimpleBbsDto> listDao(int page, int size) {
 		System.out.println("--------------- listDao 실행 ---------------");
-		String query = "select * from simple_bbs order by id desc";
+		// page=2&size=3
+		int offset = (page - 1) * size;
+		
+		
+		String query = "select * from simple_bbs order by id desc limit ? offset ?";
 		
 		List<SimpleBbsDto> list = template.query(
-				query, new BeanPropertyRowMapper<>(SimpleBbsDto.class)
+				query, new BeanPropertyRowMapper<>(SimpleBbsDto.class),size,offset
 				);
 
 		return list;

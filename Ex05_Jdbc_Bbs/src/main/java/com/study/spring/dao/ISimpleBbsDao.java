@@ -11,7 +11,8 @@ public interface ISimpleBbsDao {
 	
 	//list - List<SimpleBbsDto>
 
-	public List<SimpleBbsDto> listDao();
+//	public List<SimpleBbsDto> listDao();
+	public List<SimpleBbsDto> listDao(int page, int size);
 
     //count - Integer(null이 나오면 안됨, 래퍼클래스)
 	public Integer countDao();
