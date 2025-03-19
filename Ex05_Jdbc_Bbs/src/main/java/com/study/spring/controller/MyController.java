@@ -23,14 +23,14 @@ public class MyController {
 	
 	@RequestMapping("/")
 	public String root() {
-		return "redirect:list";
+		return "index";
 	}
 	
 	
 
 	@RequestMapping("/writeForm")
 	public String writeForm() {
-		return "writeForm";
+		return "bbs/writeForm";
 	}
 
 	@RequestMapping("/write")
@@ -42,15 +42,15 @@ public class MyController {
 		dao.writeDao(writer, title, content);
 		
 		System.out.println(writer + title + content);
-		return "redirect:list";
+		return "redirect:bbs/list";
 	}
 	
-	
+	//localhost:8080/list?page=2&size=10
 	@RequestMapping("/list")
 	public String list(Model model) {
 		model.addAttribute("lists",dao.listDao());
-		model.addAttribute("count",dao.countDao());
-		return "list";
+		model.addAttribute("totalCount",dao.countDao());
+		return "bbs/list";
 	}
 	
 	
@@ -64,7 +64,7 @@ public class MyController {
 		
 		model.addAttribute("dto",dao.viewDao(sId));
 		
-		return "view";
+		return "bbs/view";
 	}
 	
 	// http://localhost:8080/delete?id=1
@@ -75,7 +75,7 @@ public class MyController {
 		
 		dao.deleteDao(request.getParameter("id"));
 		
-		return "redirect:list";
+		return "redirect:bbs/list";
 	}
 	
 	

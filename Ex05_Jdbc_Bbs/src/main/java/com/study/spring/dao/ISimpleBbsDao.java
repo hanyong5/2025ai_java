@@ -10,6 +10,7 @@ public interface ISimpleBbsDao {
 
 	
 	//list - List<SimpleBbsDto>
+
 	public List<SimpleBbsDto> listDao();
 
     //count - Integer(null이 나오면 안됨, 래퍼클래스)
