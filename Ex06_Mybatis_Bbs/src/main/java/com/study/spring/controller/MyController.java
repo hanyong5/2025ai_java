@@ -67,7 +67,10 @@ public class MyController {
 		
 		int totalPages = (int)Math.ceil((double) totalCount / size);
 		
-		List<SimpleBbsDto> list = dao.listDao(page,size);
+		int offset =( page - 1) * size;
+		
+		
+		List<SimpleBbsDto> list = dao.listDao(size,offset);
 				
 				
 				

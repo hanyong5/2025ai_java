@@ -8,7 +8,7 @@
 <head>
 <meta charset="UTF-8">
 <title>LG</title>
-<link rel="stylesheet" href="/webjars/bootstrap/5.3.3/css/bootstrap.css"
+<link rel="stylesheet" href="/webjars/bootstrap/5.3.2/css/bootstrap.css"
 	media="all" />
 <link rel="stylesheet" href="css/style.css" media="all" />
 

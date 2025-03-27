@@ -45,7 +45,7 @@ dependencies {
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 	
 	//bootstrap 설정
-	runtimeOnly "org.webjars:bootstrap:5.3.3"
+	//runtimeOnly "org.webjars:bootstrap:5.3.3"
   
   //jsp 설정
   implementation 'jakarta.servlet:jakarta.servlet-api'
