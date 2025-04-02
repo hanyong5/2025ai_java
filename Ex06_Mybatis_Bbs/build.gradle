@@ -53,6 +53,9 @@ dependencies {
   implementation 'org.glassfish.web:jakarta.servlet.jsp.jstl'
   implementation 'org.apache.tomcat.embed:tomcat-embed-jasper'
   implementation  'org.webjars:bootstrap:5.3.2'
+  
+  
+  implementation 'org.springframework.security:spring-security-taglibs'
 	
 }
 

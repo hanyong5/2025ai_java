@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="jakarta.tags.core" prefix="c"%>
+<%@ taglib prefix="sec"
+	uri="http://www.springframework.org/security/tags"%>
+
 
 
 <!DOCTYPE html>
@@ -21,6 +24,9 @@
 			<ul class="d-flex gap-3 align-items-center">
 				<li><a href="/writeForm" class="nav-link">글쓰기</a></li>
 				<li><a href="/list" class="nav-link">리스트</a></li>
+				<sec:authorize access="isAuthenticated()">
+					<li><a href="/logout" class="nav-link">로그아웃</a></li>
+				</sec:authorize>
 			</ul>
 		</div>
 	</div>
