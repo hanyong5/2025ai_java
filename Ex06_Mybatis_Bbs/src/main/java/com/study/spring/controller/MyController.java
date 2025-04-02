@@ -100,7 +100,10 @@ public class MyController {
 		return "redirect:list";
 	}
 	
-	
+	@RequestMapping("/login")
+	public String LoginPage() {
+		return "member/loginForm";
+	}
 	
 	
 	
