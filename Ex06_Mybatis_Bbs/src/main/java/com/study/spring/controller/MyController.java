@@ -1,6 +1,7 @@
 package com.study.spring.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.study.spring.dao.ISimpleBbsDao;
 import com.study.spring.dto.SimpleBbsDto;
+import com.study.spring.service.ISimpleBbsService;
 
 import jakarta.servlet.http.HttpServletRequest;
 
@@ -17,7 +19,10 @@ import jakarta.servlet.http.HttpServletRequest;
 public class MyController {
 	
 	@Autowired
-	ISimpleBbsDao dao;
+	ISimpleBbsService bbsService;
+	
+//	@Autowired
+//	ISimpleBbsDao dao;
 
 //	@RequestMapping("/")
 //	public @ResponseBody String root() {
@@ -42,7 +47,7 @@ public class MyController {
 		String title = request.getParameter("title");
 		String content = request.getParameter("content");
 	
-		dao.writeDao(writer, title, content);
+		bbsService.write(writer, title, content);
 		
 		System.out.println(writer + title + content);
 		return "redirect:list";
@@ -63,25 +68,9 @@ public class MyController {
 		
 
 		
-		int totalCount = dao.countDao();
-		
-		int totalPages = (int)Math.ceil((double) totalCount / size);
-		
-		int offset =( page - 1) * size;
-		
-		
-		List<SimpleBbsDto> list = dao.listDao(size,offset);
-				
-				
-				
-		model.addAttribute("lists",list);
-		
-		model.addAttribute("totalCount",totalCount);
-		
-		model.addAttribute("totalPages",totalPages);
-		model.addAttribute("currentPage",page);
-		model.addAttribute("size",size);
+		Map<String, Object> result = bbsService.getPagedList(page,size);
 
+		model.addAllAttributes(result);
 				
 		return "bbs/list";
 	}
@@ -95,7 +84,7 @@ public class MyController {
 			) {
 		String sId = request.getParameter("id");
 		
-		model.addAttribute("dto",dao.viewDao(sId));
+		model.addAttribute("dto",bbsService.view(sId));
 		
 		return "bbs/view";
 	}
@@ -106,7 +95,7 @@ public class MyController {
 			HttpServletRequest request
 			) {
 		
-		dao.deleteDao(request.getParameter("id"));
+		bbsService.delete(request.getParameter("id"));
 		
 		return "redirect:list";
 	}
