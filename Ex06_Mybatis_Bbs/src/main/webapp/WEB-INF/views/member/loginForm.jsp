@@ -18,10 +18,18 @@
 			</div>
 			<div class="offset-md-4 col-md-4 mb-3">
 				<input type="text" class="form-control" name="site_password" />
+
+
 			</div>
+			<c:if test="${param.error != null }">
+				<div class="alert alert-primary offset-md-4 col-md-4" role="alert">
+					${error_message }</div>
+			</c:if>
+
 			<div class="offset-md-4 col-md-4">
-				<input type="submit"  class="btn btn-primary" value="로그인" />
+				<input type="submit" class="btn btn-primary" value="로그인" />
 			</div>
+
 		</form>
 
 

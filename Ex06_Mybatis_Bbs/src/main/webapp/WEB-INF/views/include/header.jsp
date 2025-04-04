@@ -26,6 +26,10 @@
 				<li><a href="/list" class="nav-link">리스트</a></li>
 				<sec:authorize access="isAuthenticated()">
 					<li><a href="/logout" class="nav-link">로그아웃</a></li>
+					<li> <sec:authentication property="principal.username" /> 님</li>
+				</sec:authorize>
+				<sec:authorize access="isAnonymous()">
+					<li><a href="/login" class="nav-link">로그인</a></li>
 				</sec:authorize>
 			</ul>
 		</div>
