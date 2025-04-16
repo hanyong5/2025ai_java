@@ -7,8 +7,11 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import lombok.Data;
+import lombok.Getter;
 
 @Entity
+@Data
 @Table(name="testtable")
 public class TestEntity {
 
@@ -21,6 +24,8 @@ public class TestEntity {
 	private String email;
 	private String title;
 	private String content;
-	private LocalDateTime datetime; 
+	private LocalDateTime datetime;
+	
+
 	
 }
