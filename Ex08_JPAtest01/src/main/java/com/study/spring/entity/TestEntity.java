@@ -7,6 +7,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import lombok.Builder;
 import lombok.Data;
 import lombok.Getter;
 
@@ -19,12 +20,13 @@ public class TestEntity {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id; // primary key, auto increment
 	
-	
 	private String name;
 	private String email;
 	private String title;
 	private String content;
 	private LocalDateTime datetime;
+	
+
 	
 
 	
