@@ -32,7 +32,7 @@ public class TestService {
 
 	public List<TestEntity> findAll() {
 
-		return testRepository.findAll();
+		return testRepository.findAll(Sort.by(Sort.Direction.DESC,"id"));
 	}
 
 	public void delete(Long id) {
