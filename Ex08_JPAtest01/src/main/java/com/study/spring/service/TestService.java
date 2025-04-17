@@ -19,11 +19,11 @@ public class TestService {
 
 	public void createPost(TestDto request) {
 		TestEntity testdata = new TestEntity();
-		testdata.setName(request.getName());
-		testdata.setEmail(request.getEmail());
-		testdata.setTitle(request.getTitle());
-		testdata.setContent(request.getContent());
-		testdata.setDatetime(LocalDateTime.now());
+			testdata.setName(request.getName());
+			testdata.setEmail(request.getEmail());
+			testdata.setTitle(request.getTitle());
+			testdata.setContent(request.getContent());
+			testdata.setDatetime(LocalDateTime.now());
 
 		
 		testRepository.save(testdata);
@@ -33,6 +33,20 @@ public class TestService {
 	public List<TestEntity> findAll() {
 
 		return testRepository.findAll();
+	}
+
+	public void delete(Long id) {
+		TestEntity testEntity = testRepository.findById(id).orElseThrow();
+		testRepository.delete(testEntity);
+		
+	}
+
+	public void update(Long id, String name, String title, String content) {
+		TestEntity testEntity = testRepository.findById(id).orElseThrow();
+		testEntity.changeNameAndTitleAndContent(name,title,content);
+		
+		testRepository.save(testEntity);
+		
 	}
 
 

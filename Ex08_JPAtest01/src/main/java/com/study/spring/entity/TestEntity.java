@@ -25,6 +25,15 @@ public class TestEntity {
 	private String title;
 	private String content;
 	private LocalDateTime datetime;
+	private LocalDateTime udatetime;
+	
+	public void changeNameAndTitleAndContent(String name, String title, String content) {
+		this.name = name;
+		this.title = title;
+		this.content = content;
+		this.udatetime = LocalDateTime.now();
+		
+	}
 	
 
 	

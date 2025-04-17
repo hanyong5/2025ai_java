@@ -37,5 +37,26 @@ public class TestController {
 	public List<TestEntity> testList(){
 		return testService.findAll();
 	}
+	
+	@DeleteMapping("/test")
+	public void testDelete(
+			@RequestParam("id") Long id
+			) {
+		testService.delete(id);
+	}
+	
+	@PutMapping("/test")
+	public void testUpdate(
+			@RequestParam("id") Long id,
+			@RequestBody TestDto request
+			) {
+		testService.update(
+				id,
+				request.getName(),
+				request.getTitle(),
+				request.getContent()
+				);
+	}
+	
 
 }
