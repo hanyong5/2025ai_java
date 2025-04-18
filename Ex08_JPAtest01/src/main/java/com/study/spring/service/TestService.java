@@ -4,6 +4,8 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
@@ -30,10 +32,6 @@ public class TestService {
 		
 	}
 
-	public List<TestEntity> findAll() {
-
-		return testRepository.findAll(Sort.by(Sort.Direction.DESC,"id"));
-	}
 
 	public void delete(Long id) {
 		TestEntity testEntity = testRepository.findById(id).orElseThrow();
@@ -49,6 +47,20 @@ public class TestService {
 		
 	}
 
+	public Page<TestEntity> findAll(Pageable pageable) {
+		return testRepository.findAll(pageable);
+	}
+
+
+	public Page<TestEntity> search(String query, Pageable pageable) {
+
+		return testRepository.findByTitleContaining(query,pageable);
+	}
+
+//	public List<TestEntity> findAll() {
+//
+//		return testRepository.findAll(Sort.by(Sort.Direction.DESC,"id"));
+//	}
 
 
 	

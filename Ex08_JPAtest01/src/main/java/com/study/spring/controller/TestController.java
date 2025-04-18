@@ -3,6 +3,9 @@ package com.study.spring.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -35,9 +38,12 @@ public class TestController {
 		testService.createPost(request);
 	}
 	
+	
+	
+	// http://localhost:8080/test?page=0&size=5
 	@GetMapping("/test")
-	public List<TestEntity> testList(){
-		return testService.findAll();
+	public Page<TestEntity> testList(Pageable pageable){
+		return testService.findAll(pageable);
 	}
 	
 	@DeleteMapping("/test")
@@ -60,5 +66,26 @@ public class TestController {
 				);
 	}
 	
+	// test/search?query=안녕&page=0&size=5
+	@GetMapping("/test/search")
+	public ResponseEntity<Page<TestEntity>>  testSearchList(
+			@RequestParam("query") String query, 
+			Pageable pageable
+			){
+		Page<TestEntity> data = testService.search(query,pageable);
+		
+		
+		return ResponseEntity.ok(data);
+	}
+	
 
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }
