@@ -9,5 +9,5 @@ public class TestImageDto {
 	private String title;
 	private String name;
 	private String content;
-	private MultipartFile file;
+	private MultipartFile files;
 }
