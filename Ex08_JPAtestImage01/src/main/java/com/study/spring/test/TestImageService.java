@@ -2,6 +2,7 @@ package com.study.spring.test;
 
 import java.io.File;
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -32,20 +33,43 @@ public class TestImageService {
 			System.out.println("파일크기 : " + fileImage.getSize());
 			System.out.println("파일타입 : " + fileImage.getContentType());
 			
-			//디렉토리생성
-			File folder = new File(uploadDir);
-			if(!folder.exists()) {
-				folder.mkdir();
+			try {
+				
+				//1. 폴더생성
+				File folder = new File(uploadDir);
+				if(!folder.exists()) {
+					folder.mkdir();
+				}
+				
+				//2. 파일이름처리
+				String originalName = fileImage.getOriginalFilename();
+				String uuid = UUID.randomUUID().toString();
+				String extension = originalName.substring(originalName.lastIndexOf("."));
+				String storeFileName = uuid + extension;
+				
+				System.out.println("파일명생성 : "+storeFileName);
+				
+				//3. 원본파일저장
+				File originFile = new File(uploadDir+ File.separator + storeFileName);
+				fileImage.transferTo(originFile);
+				
+				
+				//4. createData 넣기
+				createData.setImageFileNames(storeFileName);
+				
+			} catch (Exception e) {
+				// TODO: handle exception
 			}
-			
 			
 			
 		}else {
 			System.out.println("파일이 없네요!!!");
 		}
 		
-		
 		System.out.println("entity : " + createData.toString());
+		
+		//db 저장완료
+		testImageRepository.save(createData);
 		
 		
 	}
