@@ -2,10 +2,13 @@ package com.study.spring.test;
 
 import java.io.File;
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -83,6 +86,12 @@ public class TestImageService {
 		testImageRepository.save(createData);
 		
 		
+	}
+
+
+	public Page<TestImageEntity> findAll(Pageable pageable) {
+//		List<TestImageEntity>  data =testImageRepository.findAll();
+		return testImageRepository.findAll(pageable);
 	}
 
 }

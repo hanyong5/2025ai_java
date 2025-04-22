@@ -3,11 +3,16 @@ package com.study.spring.test;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.core.io.Resource;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -68,6 +73,23 @@ public class TestImageController {
 				.contentType(MediaType.parseMediaType(contentType))
 				.body(resource);
 	}
+	
+//	@GetMapping("/test")
+//	public List<TestImageEntity> testLists(){
+//		List<TestImageEntity> data = testImageService.findAll();
+//		return data;
+//		
+//	}
+	
+	// page-> Pageable pageable, type->Page
+	@GetMapping("/test")
+	public ResponseEntity<Page<TestImageEntity>> testLists(
+			@PageableDefault(size=2,sort="id",direction = Sort.Direction.DESC) Pageable pageable ){
+		Page<TestImageEntity> data = testImageService.findAll(pageable);
+		return ResponseEntity.ok(data);
+		
+	}
+
 	
 	
 	
