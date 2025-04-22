@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import net.coobird.thumbnailator.Thumbnails;
+
 @Service
 public class TestImageService {
 	
@@ -46,12 +48,21 @@ public class TestImageService {
 				String uuid = UUID.randomUUID().toString();
 				String extension = originalName.substring(originalName.lastIndexOf("."));
 				String storeFileName = uuid + extension;
+				String thumbnailFileName = "thumb_" + uuid + extension;
+				
+				
 				
 				System.out.println("파일명생성 : "+storeFileName);
 				
 				//3. 원본파일저장
 				File originFile = new File(uploadDir+ File.separator + storeFileName);
 				fileImage.transferTo(originFile);
+				
+				
+				//4.thumbnail
+				File thumbnailFile = new File(uploadDir+ File.separator + thumbnailFileName);
+				Thumbnails.of(originFile).size(150, 150).toFile(thumbnailFile);
+				
 				
 				
 				//4. createData 넣기
