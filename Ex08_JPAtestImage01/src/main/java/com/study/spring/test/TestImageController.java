@@ -44,7 +44,7 @@ public class TestImageController {
 	}
 	
 	// http://localhost:8080/images/thumb_28cee97b...jpg
-	// react <img src={`http://localhost:8080/images/thum_${item.filename}`}>
+	// react / <img src={`http://localhost:8080/images/thum_${item.filename}`}>
 	@GetMapping("/images/{filename}")
 	public ResponseEntity<Resource> getImage(
 			@PathVariable("filename") String filename
@@ -89,6 +89,7 @@ public class TestImageController {
 		return ResponseEntity.ok(data);
 		
 	}
+	
 
 	
 	

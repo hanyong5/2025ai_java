@@ -62,13 +62,13 @@ public class TestImageService {
 				fileImage.transferTo(originFile);
 				
 				
-				//4.thumbnail
+				//4.thumbnail 이미지 저장
 				File thumbnailFile = new File(uploadDir+ File.separator + thumbnailFileName);
 				Thumbnails.of(originFile).size(150, 150).toFile(thumbnailFile);
 				
 				
 				
-				//4. createData 넣기
+				//5. createData entity 넣을 준비
 				createData.setImageFileNames(storeFileName);
 				
 			} catch (Exception e) {
