@@ -6,6 +6,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -73,5 +74,16 @@ public class TestService {
 		testRepository.save(entity);
 		
 	}
+
+	public List<TestResponseDto> findAll() {
+		
+		return testRepository.findAll()
+				.stream()
+//				.map(entity -> new TestResponseDto(entity))
+				.map(TestResponseDto::new)
+				.collect(Collectors.toList());
+	}
+
+
 
 }

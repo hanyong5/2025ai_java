@@ -2,6 +2,7 @@ package com.study.spring.test;
 
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -69,5 +70,21 @@ public class TestController {
 		}
 		
 	}
+	
+//	@GetMapping("/test")
+//	public List<TestEntity> testList(){
+//		List<TestEntity> data = testService.findAll();
+//		return data;
+//	}
+	
+	@GetMapping("/test")
+	public List<TestResponseDto> testList(){
+		List<TestResponseDto> data = testService.findAll();
+		return data;
+	}
+	
+
+	
+	
 	
 }
