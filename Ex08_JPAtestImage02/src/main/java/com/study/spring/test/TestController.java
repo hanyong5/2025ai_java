@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -102,7 +103,6 @@ public class TestController {
 
 	// http://localhost:8080/images/thumb_28cee97b...jpg
 	// react / <img src={`http://localhost:8080/images/thum_${item.filename}`}>
-
 	@GetMapping("/images/{filename}")
 	public ResponseEntity<Resource> getImage(@PathVariable("filename") String filename) throws IOException {
 		File file = new File(uploadDir + filename);
@@ -124,5 +124,24 @@ public class TestController {
 				.body(resource);
 
 	}
-
+	
+	
+	// test/search?query=홍길동&page=0&size=10
+	@GetMapping("/test/search")
+	public ResponseEntity<Page<TestResponseDto>> testSearch(
+			@RequestParam("query") String query,
+			@PageableDefault(size = 10, sort = "id", direction = Sort.Direction.DESC) Pageable pageable) {
+		Page<TestResponseDto> data = testService.findAll(query,pageable);
+		return ResponseEntity.ok(data);
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+ 
 }

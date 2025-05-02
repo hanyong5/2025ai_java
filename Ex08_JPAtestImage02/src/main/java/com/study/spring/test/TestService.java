@@ -91,6 +91,10 @@ public class TestService {
 				.map(TestResponseDto::new);
 	}
 
+	public Page<TestResponseDto> findAll(String query, Pageable pageable) {
+		return testRepository.findByTitleContainingIgnoreCase(query,pageable);
+	}
+
 
 
 }
