@@ -10,6 +10,8 @@ import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -75,13 +77,18 @@ public class TestService {
 		
 	}
 
-	public List<TestResponseDto> findAll() {
-		
-		return testRepository.findAll()
-				.stream()
+//	public List<TestResponseDto> findAll() {
+//		
+//		return testRepository.findAll()
+//				.stream()
 //				.map(entity -> new TestResponseDto(entity))
-				.map(TestResponseDto::new)
-				.collect(Collectors.toList());
+//				.map(TestResponseDto::new)
+//				.collect(Collectors.toList());
+//	}
+
+	public Page<TestResponseDto> findAll(Pageable pageable) {
+		return testRepository.findAll(pageable)
+				.map(TestResponseDto::new);
 	}
 
 
