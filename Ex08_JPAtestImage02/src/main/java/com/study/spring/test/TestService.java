@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
@@ -93,6 +94,29 @@ public class TestService {
 
 	public Page<TestResponseDto> findAll(String query, Pageable pageable) {
 		return testRepository.findByTitleContainingIgnoreCase(query,pageable);
+	}
+
+	public Optional<TestEntity> findById(Long id) {
+		return testRepository.findById(id);
+	}
+
+	public boolean testDelete(Long id) {
+		
+		Optional<TestEntity> optional = testRepository.findById(id);
+		
+		if(optional.isPresent()) {
+			TestEntity entity = optional.get();
+			System.out.println(entity.toString());
+			testRepository.deleteById(id);
+			return true;
+		}else {
+			System.out.println("데이터가 없네요");
+			return false;		
+		}
+			
+		
+		
+		
 	}
 
 

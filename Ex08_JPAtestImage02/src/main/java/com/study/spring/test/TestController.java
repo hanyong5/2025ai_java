@@ -6,6 +6,7 @@ import java.nio.file.Files;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -18,6 +19,7 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -133,6 +135,34 @@ public class TestController {
 			@PageableDefault(size = 10, sort = "id", direction = Sort.Direction.DESC) Pageable pageable) {
 		Page<TestResponseDto> data = testService.findAll(query,pageable);
 		return ResponseEntity.ok(data);
+	}
+	
+	
+	@GetMapping("/test/{id}")
+	public ResponseEntity<TestResponseDto> testViewId(@PathVariable("id") Long id) {
+		Optional<TestEntity> optional = testService.findById(id);
+
+		
+		if(optional.isPresent()) {
+			return ResponseEntity.ok(new TestResponseDto(optional.get()));
+			
+		}else {
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+		}
+		
+	}
+	
+	
+	
+	@DeleteMapping("/test/{id}")
+	public ResponseEntity<String> testDelete(
+			@PathVariable("id") Long id
+			){
+		
+		boolean isDeleted = testService.testDelete(id);
+		System.out.println("자료확인" + isDeleted);
+		
+		return ResponseEntity.status(HttpStatus.OK).body("데이터삭제완료");
 	}
 	
 	
