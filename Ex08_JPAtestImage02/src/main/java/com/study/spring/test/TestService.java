@@ -113,9 +113,6 @@ public class TestService {
 			System.out.println("데이터가 없네요");
 			return false;		
 		}
-			
-		
-		
 		
 	}
 
