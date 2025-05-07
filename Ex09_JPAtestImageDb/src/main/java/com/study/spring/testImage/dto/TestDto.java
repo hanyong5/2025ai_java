@@ -25,4 +25,7 @@ public class TestDto {
 	@Builder.Default
 	private List<MultipartFile> files = new ArrayList<>();
 	
+	@Builder.Default
+	private List<String> uploadedFileNames = new ArrayList<>();
+	
 }

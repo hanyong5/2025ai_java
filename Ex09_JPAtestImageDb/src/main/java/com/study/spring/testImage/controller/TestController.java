@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.study.spring.testImage.dto.TestDto;
+import com.study.spring.testImage.service.TestService;
 import com.study.spring.util.CustomFileUtil;
 
 import lombok.extern.log4j.Log4j2;
@@ -24,6 +25,9 @@ public class TestController {
 	@Autowired
 	private CustomFileUtil fileUtil;
 	
+	@Autowired
+	private TestService testService;
+	
 	@PostMapping("/")
 	public Map<String, String> testPost(@ModelAttribute TestDto testDto) {
 		System.out.println("post" + testDto);
@@ -31,8 +35,12 @@ public class TestController {
 		List<MultipartFile> files = testDto.getFiles();
 		List<String> uploadedFileNames = fileUtil.uploadFile(files);
 		
+		testDto.setUploadedFileNames(uploadedFileNames);
+		
 		
 		log.info("filenames : " + uploadedFileNames);
+		
+		testService.testInsert(testDto);
 		
 		return Map.of("result","success");
 	}

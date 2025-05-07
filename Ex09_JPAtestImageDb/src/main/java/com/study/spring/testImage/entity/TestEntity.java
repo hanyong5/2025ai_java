@@ -39,7 +39,24 @@ public class TestEntity {
 	@JoinColumn(name = "member_id")
 	private Member member;
 	
+	@Builder.Default
 	@OneToMany(mappedBy = "testEntity",cascade = CascadeType.ALL,orphanRemoval = true)
 	@OrderBy("ord ASC")
 	private List<TestImage> imageList = new ArrayList<>();
+	
+	
+	
+	public void addImageString(String fileName) {
+//		TestImage image = new TestImage();
+//		image.setStoredName(fileName);
+		
+		TestImage image = TestImage.builder()
+				.storedName(fileName)
+				.ord(imageList.size())
+				.testEntity(this)
+				.build();
+		imageList.add(image);
+		
+	}
+	
 }
