@@ -5,6 +5,8 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -58,12 +60,27 @@ public class TestController {
 		return fileUtil.getFile(fileName);
 	}
 	
+//	@GetMapping("/")
+//	public ResponseEntity<Map<String, Object>> testListView(){
+//		List<TestResponseDto> testList = testService.getList();
+//		return ResponseEntity.ok(Map.of("result","success","data",testList));
+//	}
+	
 	@GetMapping("/")
-	public ResponseEntity<Map<String, Object>> testListView(){
-		List<TestResponseDto> testList = testService.getList();
+	public ResponseEntity<Map<String, Object>> testList(Pageable pageable){
+		Page<TestResponseDto> testList = testService.getList(pageable);
 		return ResponseEntity.ok(Map.of("result","success","data",testList));
 	}
 	
+	@GetMapping("/view/{id}")
+	public ResponseEntity<Map<String,Object>> testListView(
+			@PathVariable("id") Long id
+			){
+		
+		TestResponseDto test = testService.getById(id);
+		
+		return ResponseEntity.ok(Map.of("result","success","view",test));
+	}
 	
 	
 	

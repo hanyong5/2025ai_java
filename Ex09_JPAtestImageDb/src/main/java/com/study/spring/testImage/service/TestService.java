@@ -3,9 +3,12 @@ package com.study.spring.testImage.service;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.study.spring.testImage.dto.TestDto;
@@ -103,6 +106,59 @@ public class TestService {
 		return resultList;
 		
 	}
+
+	public Page<TestResponseDto> getList(Pageable pageable) {
+		Page<TestEntity> tests = testRepository.findAll(pageable);
+
+		Page<TestResponseDto> resultList = tests
+				.map(test->{
+					List<String> imageNames = test.getImageList().stream()
+							.map(TestImage::getStoredName)
+							.toList();
+					
+					return new TestResponseDto(
+							test.getId(),
+							test.getTitle(),
+							test.getName(),
+							test.getContent(),
+							imageNames
+							);
+				});
+		
+		return resultList;
+		
+		
+//		return testRepository.findAll(pageable)
+//					.map(test->{
+//					List<String> imageNames = test.getImageList().stream()
+//							.map(TestImage::getStoredName)
+//							.toList();
+//					
+//					return new TestResponseDto(
+//							test.getId(),
+//							test.getTitle(),
+//							test.getName(),
+//							test.getContent(),
+//							imageNames
+//							);
+//				});
+	}
+
+	public TestResponseDto getById(Long id) {
+		TestEntity test = testRepository.findById(id)
+				.orElseThrow(()->new RuntimeException("not found"));
+		
+		List<String> imageNames = test.getImageList().stream()
+				.map(TestImage::getStoredName).toList();
+		
+		return new TestResponseDto(
+				test.getId(),
+				test.getName(),
+				test.getTitle(),
+				test.getContent(),
+				imageNames);
+	}
+
 	
 	
 
