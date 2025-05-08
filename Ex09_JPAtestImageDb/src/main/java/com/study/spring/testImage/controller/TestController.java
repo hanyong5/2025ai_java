@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.study.spring.testImage.dto.TestDto;
+import com.study.spring.testImage.dto.TestResponseDto;
 import com.study.spring.testImage.service.TestService;
 import com.study.spring.util.CustomFileUtil;
 
@@ -56,6 +57,14 @@ public class TestController {
 		
 		return fileUtil.getFile(fileName);
 	}
+	
+	@GetMapping("/")
+	public ResponseEntity<Map<String, Object>> testListView(){
+		List<TestResponseDto> testList = testService.getList();
+		return ResponseEntity.ok(Map.of("result","success","data",testList));
+	}
+	
+	
 	
 	
 	
