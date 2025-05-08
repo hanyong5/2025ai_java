@@ -2,6 +2,7 @@ package com.study.spring.util;
 
 import java.io.File;
 import java.io.IOException;
+
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -10,6 +11,10 @@ import java.util.List;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.io.FileSystemResource;
+import org.springframework.core.io.Resource;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -76,5 +81,30 @@ public class CustomFileUtil {
 		}
 		return uploadNames;
 	}
+	
+	
+	public ResponseEntity<Resource> getFile(String fileName){
+		
+		Resource resource = new FileSystemResource(uploadDir + File.separator + fileName);
+		
+		if(!resource.exists()) {
+			resource = new FileSystemResource(uploadDir + File.separator  + "default.png");
+		}
+		
+		HttpHeaders headers = new HttpHeaders();
+		
+		try {
+			headers.add("content-type", Files.probeContentType(resource.getFile().toPath()));
+		} catch (IOException e) {
+			return ResponseEntity.internalServerError().build();
+		}
+		
+		
+		return ResponseEntity.ok().headers(headers).body(resource);
+	}
+	
+	
+	
+	
 	
 }
