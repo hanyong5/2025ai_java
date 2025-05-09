@@ -199,6 +199,29 @@ public class TestService {
 		log.info("원본이미지 목록", test.getImageList().size());
 		test.getImageList().forEach(img -> log.info(" - {}",img.getStoredName()));
 		
+		
+		//기존 db 저장된 파일명
+		List<String> currentDBFiles = test.getImageList().stream()
+				.map(TestImage::getStoredName)
+				.toList();
+		
+		List<String> updatedFileNames = dto.getUpdatedFileNames();
+		
+		List<String> toDelete = currentDBFiles.stream()
+				.filter(oldName -> !updatedFileNames.contains(oldName))
+				.toList();
+		
+		test.getImageList().removeIf(img -> toDelete.contains(img.getStoredName()));
+		
+		fileUtil.deleteFiles(toDelete);
+		
+		if(dto.getNewUploadedFileNames() != null) {
+			for(String fileName:dto.getNewUploadedFileNames()) {
+				test.addImageString(fileName);
+			}
+		}
+		
+		
 		testRepository.save(test);
 	}
 
