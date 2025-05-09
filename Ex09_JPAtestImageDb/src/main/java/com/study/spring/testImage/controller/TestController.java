@@ -1,5 +1,6 @@
 package com.study.spring.testImage.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -14,12 +15,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.study.spring.testImage.dto.TestDto;
 import com.study.spring.testImage.dto.TestResponseDto;
+import com.study.spring.testImage.dto.TestUpdateDto;
 import com.study.spring.testImage.service.TestService;
 import com.study.spring.util.CustomFileUtil;
 
@@ -93,12 +96,42 @@ public class TestController {
 		boolean isDeleted = testService.testDelete(id);
 		
 		if(isDeleted) {
-			return ResponseEntity.ok(Map.of("rusult","success","deletedId",id));
+			return ResponseEntity.ok(Map.of("result","success","deletedId",id));
 		}else {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND)
 					.body(Map.of("rusult","fail","message","해당자료를 없네요","id",id));
 		}
 		
+	}
+	
+	@PutMapping("/update/{id}")
+	public ResponseEntity<?> updatePost(
+			@PathVariable("id") Long id,
+			@ModelAttribute TestUpdateDto dto
+			){
+		
+		List<String> uploadedFileNames = new ArrayList<>();
+		
+		if(dto.getFiles() != null && !dto.getFiles().isEmpty()) {
+			uploadedFileNames = fileUtil.uploadFile(dto.getFiles());
+			dto.setNewUploadedFileNames(uploadedFileNames);
+		}
+		
+		List<String> totalUpdatedFilenames = new ArrayList<>();
+		if(dto.getUpdatedFileNames() != null) {
+			totalUpdatedFilenames.addAll(dto.getUpdatedFileNames());
+		}
+		totalUpdatedFilenames.addAll(uploadedFileNames);
+		
+		dto.setUpdatedFileNames(totalUpdatedFilenames);
+		
+		
+		
+		testService.updateTest(id,dto);
+		
+		
+		
+		return ResponseEntity.ok(Map.of("result","success","id",id));
 	}
 	
 	

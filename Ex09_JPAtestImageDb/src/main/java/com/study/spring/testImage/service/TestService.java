@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 
 import com.study.spring.testImage.dto.TestDto;
 import com.study.spring.testImage.dto.TestResponseDto;
+import com.study.spring.testImage.dto.TestUpdateDto;
 import com.study.spring.testImage.entity.TestEntity;
 import com.study.spring.testImage.entity.TestImage;
 import com.study.spring.testImage.repository.TestRepository;
@@ -178,8 +179,6 @@ public class TestService {
 			
 			fileUtil.deleteFiles(storedNames);
 			
-	
-			
 			testRepository.delete(test);
 			
 			return true;
@@ -187,6 +186,20 @@ public class TestService {
 			return false;
 		}
 		
+	}
+
+	public void updateTest(Long id, TestUpdateDto dto) {
+		TestEntity test = testRepository.findByIdWidthImages(id).orElseThrow();
+		
+		test.setTitle(dto.getTitle());
+		test.setContent(dto.getContent());
+		test.setName(dto.getName());
+		
+		
+		log.info("원본이미지 목록", test.getImageList().size());
+		test.getImageList().forEach(img -> log.info(" - {}",img.getStoredName()));
+		
+		testRepository.save(test);
 	}
 
 	
