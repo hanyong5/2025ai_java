@@ -3,6 +3,7 @@ package com.study.spring.testImage.service;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
@@ -16,6 +17,7 @@ import com.study.spring.testImage.dto.TestResponseDto;
 import com.study.spring.testImage.entity.TestEntity;
 import com.study.spring.testImage.entity.TestImage;
 import com.study.spring.testImage.repository.TestRepository;
+import com.study.spring.util.CustomFileUtil;
 
 import lombok.extern.log4j.Log4j2;
 
@@ -25,6 +27,9 @@ public class TestService {
 
 	@Autowired
 	private TestRepository testRepository;
+	
+	@Autowired
+	private CustomFileUtil fileUtil;
 
 	public void testInsert(TestDto dto) {
 		
@@ -157,6 +162,31 @@ public class TestService {
 				test.getTitle(),
 				test.getContent(),
 				imageNames);
+	}
+
+	public boolean testDelete(Long id) {
+		Optional<TestEntity> testId = testRepository.findById(id);
+	
+
+		if(testId.isPresent()) {
+			TestEntity test = testId.get();
+			log.info("--------------id-----------------" + id);
+			
+			List<String> storedNames = test.getImageList().stream()
+					.map(TestImage::getStoredName)
+					.toList();
+			
+			fileUtil.deleteFiles(storedNames);
+			
+	
+			
+			testRepository.delete(test);
+			
+			return true;
+		}else {
+			return false;
+		}
+		
 	}
 
 	

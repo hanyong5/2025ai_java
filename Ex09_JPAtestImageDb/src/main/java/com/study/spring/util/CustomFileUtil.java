@@ -102,9 +102,39 @@ public class CustomFileUtil {
 		
 		return ResponseEntity.ok().headers(headers).body(resource);
 	}
+
+
 	
 	
 	
+	public void deleteFiles(List<String> fileNames) {
+		
+		if(fileNames == null || fileNames.size() == 0) {
+			return;
+		}
+		
+		
+		fileNames.forEach(fileName -> {
+			String thumbnailFile = "thumb_" + fileName;
+			
+			Path thumbnailPath = Paths.get(uploadDir,thumbnailFile);
+			Path filePath = Paths.get(uploadDir,fileName);
+			
+			
+			try {
+				Files.deleteIfExists(filePath);
+				Files.deleteIfExists(thumbnailPath);
+				
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+		});
+		
+	}
 	
+	
+
 	
 }
