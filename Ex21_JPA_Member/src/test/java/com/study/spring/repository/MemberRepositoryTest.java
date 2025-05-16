@@ -27,7 +27,7 @@ public class MemberRepositoryTest {
 //		for (int i = 0; i < 10; i++) {
 //			Member member = Member.builder()
 //					.email("user" + i + "@naver.com")
-//					.pw(passwordEncoder.encode("1111"))
+//					.password(passwordEncoder.encode("1111"))
 //					.nickname("user" + i)
 //					.build();
 //			member.addRole(MemberRole.USER);
@@ -49,8 +49,11 @@ public class MemberRepositoryTest {
 	  public void testRead() {
 
 	    String email = "user9@naver.com";
+	    
+	    
 
 	    Optional<Member> member = memberRepository.findByEmail(email);
+
 
 	    log.info("-----------------");
 	    log.info(member);

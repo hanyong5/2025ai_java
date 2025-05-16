@@ -48,7 +48,7 @@ public class CustomUserDetailsService implements UserDetailsService{
 			System.out.println("정확한 정보임"+ member.toString());
 		    MemberDto memberDto = new MemberDto(
 		    		member.get().getEmail(),
-			        member.get().getPw(),
+			        member.get().getPassword(),
 			        member.get().getNickname(),
 			        member.get().isSocial(),
 			        member.get().getMemberRoleList()

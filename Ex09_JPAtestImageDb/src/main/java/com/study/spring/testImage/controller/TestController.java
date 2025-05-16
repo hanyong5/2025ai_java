@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -72,7 +74,9 @@ public class TestController {
 //	}
 	
 	@GetMapping("/")
-	public ResponseEntity<Map<String, Object>> testList(Pageable pageable){
+	public ResponseEntity<Map<String, Object>> testList(
+			
+			@PageableDefault(size = 8, sort = "id", direction = Sort.Direction.DESC) Pageable pageable){
 		Page<TestResponseDto> testList = testService.getList(pageable);
 		return ResponseEntity.ok(Map.of("result","success","data",testList));
 	}

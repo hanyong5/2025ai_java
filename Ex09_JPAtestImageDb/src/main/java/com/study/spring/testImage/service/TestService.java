@@ -159,8 +159,8 @@ public class TestService {
 		
 		return new TestResponseDto(
 				test.getId(),
-				test.getName(),
 				test.getTitle(),
+				test.getName(),
 				test.getContent(),
 				imageNames);
 	}

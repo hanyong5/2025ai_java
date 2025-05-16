@@ -13,8 +13,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class TestResponseDto {
 	private Long id;
-	private String name;
 	private String title;
+	private String name;
 	private String content;
 	private List<String> image;
 }

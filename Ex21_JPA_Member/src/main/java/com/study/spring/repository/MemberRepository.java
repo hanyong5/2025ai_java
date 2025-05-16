@@ -9,7 +9,7 @@ import org.springframework.data.repository.query.Param;
 
 import com.study.spring.entity.Member;
 
-public interface MemberRepository extends JpaRepository<Member, String>{
+public interface MemberRepository extends JpaRepository<Member, Long>{
 	  // 방법 1: JPQL + JOIN FETCH
 //    @Query("SELECT m FROM Member m LEFT JOIN FETCH m.memberRoleList WHERE m.email = :email")
 //    Optional<Member> findByEmailWithRoles(@Param("email") String email);

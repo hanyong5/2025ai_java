@@ -6,6 +6,8 @@ import java.util.List;
 import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -22,8 +24,11 @@ import lombok.ToString;
 @ToString(exclude = "memeberRoleList")
 public class Member {
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
+	
 	private String email;
-	private String pw;
+	private String password;
 	private String nickname;
 	private boolean social;
 
@@ -45,7 +50,7 @@ public class Member {
 	}
 
 	public void changePw(String pw) {
-		this.pw = pw;
+		this.password = pw;
 	}
 
 	public void changeSocial(boolean social) {
