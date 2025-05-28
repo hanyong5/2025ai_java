@@ -21,6 +21,7 @@ import lombok.ToString;
 @Getter
 @Builder
 @ToString(exclude = "memberRoleList")
+//@ToString
 public class Member {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
