@@ -45,17 +45,17 @@ public class MemberRepositoryTest {
 //	}
 	
 	
-	@Test
-	  public void testRead() {
-
-	    String email = "user9@naver.com";
-	    
-	    
-
-	    Optional<Member> member = memberRepository.findByEmail(email);
-
-
-	    log.info("-----------------");
-	    log.info(member);
-	  }
+//	@Test
+//	  public void testRead() {
+//
+//	    String email = "user9@naver.com";
+//	    
+//	    
+//
+//	    Optional<Member> member = memberRepository.findByEmail(email);
+//
+//
+//	    log.info("-----------------");
+//	    log.info(member);
+//	  }
 }
