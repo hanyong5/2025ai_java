@@ -10,12 +10,15 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 import com.study.spring.security.handler.APILoginFailHandler;
 import com.study.spring.security.handler.APILoginSuccessHandler;
+import com.study.spring.security.handler.CustomAccessDeniedHandler;
+import com.study.spring.util.JWTCheckFilter;
 
 import lombok.extern.log4j.Log4j2;
 
@@ -43,15 +46,20 @@ public class CustomSecurityConfig {
 		http.sessionManagement(config -> 
 			config.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
 		);
+		
 		http.formLogin(config -> {
 			config.loginPage("/api/member/login");
 			config.successHandler(new APILoginSuccessHandler());
 			config.failureHandler(new APILoginFailHandler());
 			
-		}
-			
-		);
+		});
 		
+		http.addFilterBefore(new JWTCheckFilter(), UsernamePasswordAuthenticationFilter.class);
+		
+		
+		 http.exceptionHandling(config -> {
+		      config.accessDeniedHandler(new CustomAccessDeniedHandler());
+		    });
 
 		return http.build();
 	}

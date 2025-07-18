@@ -22,7 +22,7 @@ public class MemberDto extends User {
 
 	public MemberDto(String email, String password,String nickname, boolean social, List<String> roleNames) {
 		super(email,password,roleNames.stream()
-				.map(str-> new SimpleGrantedAuthority("Role_"+str))
+				.map(str-> new SimpleGrantedAuthority("ROLE_"+str))
 				.collect(Collectors.toList()));
 		
 		this.email = email;
