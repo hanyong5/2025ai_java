@@ -20,9 +20,16 @@ public class BoardController {
 		return "view - User: " + auth.getName() + ", Authorities: " + auth.getAuthorities();
 	}
 	
-	@GetMapping("/test")
+	@GetMapping("/about")
 	public String test() {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		return "Test - User: " + auth.getName() + ", Authorities: " + auth.getAuthorities();
+		return "about - User: " + auth.getName() + ", Authorities: " + auth.getAuthorities();
+	}
+	
+	@GetMapping("/his")
+	@PreAuthorize("hasAnyRole('ROLE_MANAGER','ROLE_ADMIN')")
+	public String comp() {
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		return "his - User: " + auth.getName() + ", Authorities: " + auth.getAuthorities();
 	}
 }
